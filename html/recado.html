@@ -1,4 +1,8 @@
+<<<<<<< HEAD
+<!DOCTYPE html>
+=======
 
+>>>>>>> 8016c458f3dbe302b06730e5dd778c3f9264d9af
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
@@ -75,6 +79,53 @@
 
   <div id="mensagens-container"></div>
 
+<<<<<<< HEAD
+  <!-- Firebase + Lógica -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+    import { getDatabase, ref, push } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyAADUZXFhLpPFPi-eHyBHMAtYNzDjkMfJ0",
+      authDomain: "aniversariodavi-b6857.firebaseapp.com",
+      databaseURL: "https://aniversariodavi-b6857-default-rtdb.firebaseio.com",
+      projectId: "aniversariodavi-b6857",
+      storageBucket: "aniversariodavi-b6857.firebasestorage.app",
+      messagingSenderId: "1015920366290",
+      appId: "1:1015920366290:web:ef04108637f172e7d7d30b"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+
+    window.salvarMensagem = function() {
+      const nome = document.getElementById('nome').value.trim();
+      const mensagem = document.getElementById('mensagem').value.trim();
+
+      if (nome && mensagem) {
+        const recadosRef = ref(db, 'recados/');
+        push(recadosRef, { nome, mensagem, data: new Date().toISOString() })
+          .then(() => {
+            exibirMensagemSucesso();
+            document.getElementById('nome').value = "";
+            document.getElementById('mensagem').value = "";
+          })
+          .catch((error) => {
+            alert("Erro ao enviar: " + error.message);
+          });
+      } else {
+        alert("Preencha todos os campos!");
+      }
+    }
+
+    function exibirMensagemSucesso() {
+      const container = document.getElementById('mensagens-container');
+      container.innerHTML = '<div class="mensagem-enviada">Mensagem enviada com sucesso!</div>';
+      setTimeout(() => { container.innerHTML = ''; }, 3000);
+    }
+  </script>
+=======
   <script src="../js/recado.js"></script>
+>>>>>>> 8016c458f3dbe302b06730e5dd778c3f9264d9af
 </body>
 </html>

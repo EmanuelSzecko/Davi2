@@ -38,6 +38,47 @@
 <body>
   <h1>Mensagens para o Davi</h1>
   <div id="mensagens"></div>
+<<<<<<< HEAD
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+    import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyAADUZXFhLpPFPi-eHyBHMAtYNzDjkMfJ0",
+      authDomain: "aniversariodavi-b6857.firebaseapp.com",
+      databaseURL: "https://aniversariodavi-b6857-default-rtdb.firebaseio.com",
+      projectId: "aniversariodavi-b6857",
+      storageBucket: "aniversariodavi-b6857.firebasestorage.app",
+      messagingSenderId: "1015920366290",
+      appId: "1:1015920366290:web:ef04108637f172e7d7d30b"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+
+    const mensagensRef = ref(db, 'recados/');
+    const mensagensDiv = document.getElementById('mensagens');
+
+    onValue(mensagensRef, (snapshot) => {
+      mensagensDiv.innerHTML = '';
+      const data = snapshot.val();
+      if (data) {
+        // ordenar por data
+        const mensagensArray = Object.values(data).sort((a, b) => new Date(b.data) - new Date(a.data));
+        mensagensArray.forEach(msg => {
+          const msgDiv = document.createElement('div');
+          msgDiv.classList.add('mensagem');
+          msgDiv.innerHTML = `<strong>${msg.nome}:</strong> ${msg.mensagem}`;
+          mensagensDiv.appendChild(msgDiv);
+        });
+      } else {
+        mensagensDiv.innerHTML = '<p>Nenhuma mensagem ainda. Seja o primeiro a deixar um recado!</p>';
+      }
+    });
+  </script>
+=======
   <script src="../js/mensagens.js"></script>
+>>>>>>> 8016c458f3dbe302b06730e5dd778c3f9264d9af
 </body>
 </html>
